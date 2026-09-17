@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QUITO TRACKER // REGISTRO RETRO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --outer-bg: #0b0c16;
+      --frame-blue: #1d71b8;
+      --card-bg: #111625;
+      --blaugrana-blue: #004d98;
+      --blaugrana-red: #a50044;
+      --neon-cyan: #00e5ff;
+      --text-gold: #ffcc00;
+    }
+
+    body {
+      font-family: 'Press Start 2P', monospace;
+      background-color: var(--outer-bg);
+      color: #ffffff;
+      max-width: 650px;
+      margin: 20px auto;
+      padding: 15px;
+      line-height: 1.6;
+    }
+
+    .app-container {
+      background-color: var(--frame-blue);
+      border: 4px solid var(--neon-cyan);
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+    }
+
+    .form-card {
+      position: relative;
+      background: var(--card-bg);
+      padding: 25px;
+      border: 3px solid var(--blaugrana-red);
+      border-radius: 6px;
+      box-shadow: inset 0 0 10px #000;
+      overflow: hidden;
+    }
+
+    /* Estática / Scanlines CRT */
+    .form-card::before {
+      content: " ";
+      display: block;
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.35) 50%);
+      background-size: 100% 4px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    h2 {
+      color: var(--text-gold);
+      text-align: center;
+      font-size: 14px;
+      text-shadow: 2px 2px var(--blaugrana-blue);
+      margin-bottom: 25px;
+      border-bottom: 3px dashed var(--blaugrana-red);
+      padding-bottom: 12px;
+      position: relative;
+      z-index: 3;
+    }
+
+    label {
+      font-size: 9px;
+      color: var(--neon-cyan);
+      display: block;
+      margin-top: 15px;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 3;
+    }
+
+    input, select, textarea {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 10px;
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      box-sizing: border-box;
+      background-color: #06080e;
+      color: #fff;
+      border: 2px solid var(--blaugrana-blue);
+      border-radius: 4px;
+      outline: none;
+      position: relative;
+      z-index: 3;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--blaugrana-red);
+      background-color: #0d111d;
+    }
+
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(90deg, var(--blaugrana-blue) 0%, var(--blaugrana-red) 100%);
+      color: #ffffff;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 11px;
+      font-weight: bold;
+      border: 2px solid var(--neon-cyan);
+      border-radius: 4px;
+      box-shadow: 3px 3px 0px #000;
+      cursor: pointer;
+      position: relative;
+      z-index: 3;
+    }
+
+    button:hover {
+      filter: brightness(1.2);
+    }
+
+    #statusMessage {
+      margin-top: 20px;
+      padding: 15px;
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-gold);
+      border: 2px dashed var(--neon-cyan);
+      background-color: #06080e;
+      position: relative;
+      z-index: 3;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    <div class="form-card">
+      <h2>[ QUITO TRACKER ]<br>REGISTRAR LUGAR</h2>
+
+      <form id="trackerForm">
+        <label for="etiqueta">Etiqueta:</label>
+        <input type="text" id="etiqueta" value="PLANES DESTACADOS PARA JÓVENES" required>
+
+        <label for="nombre">Nombre del Lugar / Feria:</label>
+        <input type="text" id="nombre" placeholder="ej. Di Pinto (Café & Taller)" required>
+
+        <label for="direccion">Dirección (Google Maps / Link):</label>
+        <input type="text" id="direccion" placeholder="ej. Av. Amazonas y República" required>
+
+        <label for="categoria">Categoría:</label>
+        <input type="text" id="categoria" placeholder="ej. HASTA $15 USD" required>
+
+        <label for="zona">Zona:</label>
+        <select id="zona" onchange="toggleOtraZona(this.value)" required>
+          <option value="NORTE">NORTE</option>
+          <option value="CENTRO">CENTRO</option>
+          <option value="SUR">SUR</option>
+          <option value="VALLES">VALLES</option>
+          <option value="OTRO">OTRO...</option>
+        </select>
+
+        <div id="otraZonaContainer" class="hidden">
+          <label for="otraZona">Especificar otra zona:</label>
+          <input type="text" id="otraZona" placeholder="ej. CUMBAYÁ / TUMBACU">
+        </div>
+
+        <label for="tipo">Tipo:</label>
+        <input type="text" id="tipo" placeholder="ej. Plan Jóvenes / Arte & Café" required>
+
+        <label for="sticker">Sticker / Emoji:</label>
+        <input type="text" id="sticker" placeholder="🎨" required>
+
+        <label for="info">Información rápida (info):</label>
+        <input type="text" id="info" placeholder="ej. Kits desde $12.00 USD" required>
+
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" rows="3" placeholder="Concepto de café-taller..." required></textarea>
+
+        <label for="recomendacion">Recomendación:</label>
+        <input type="text" id="recomendacion" placeholder="ej. Ideal para ir en pareja" required>
+
+        <button type="submit" id="submitBtn">> GUARDAR LUGAR</button>
+      </form>
+
+      <div id="statusMessage" class="hidden"></div>
+    </div>
+  </div>
+
+  <script>
+    // Tu URL de Google Apps Script ya vinculada
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyYlDwmiQ406l3_FsUqZeOtP2B5EgdwchCeBvKSZyBOKx9Wm2i_4INY9OqcnXOem8sc/exec";
+
+    function toggleOtraZona(val) {
+      const container = document.getElementById('otraZonaContainer');
+      const inputOtra = document.getElementById('otraZona');
+      if (val === 'OTRO') {
+        container.classList.remove('hidden');
+        inputOtra.required = true;
+      } else {
+        container.classList.add('hidden');
+        inputOtra.required = false;
+        inputOtra.value = '';
+      }
+    }
+
+    document.getElementById('trackerForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const btn = document.getElementById('submitBtn');
+      const status = document.getElementById('statusMessage');
+      
+      btn.disabled = true;
+      btn.innerText = "ENVIANDO...";
+
+      const zonaSelect = document.getElementById('zona').value;
+      const zonaFinal = zonaSelect === 'OTRO' ? document.getElementById('otraZona').value.toUpperCase() : zonaSelect;
+
+      const lugarData = {
+        etiqueta: document.getElementById('etiqueta').value,
+        nombre: document.getElementById('nombre').value,
+        direccion_maps: document.getElementById('direccion').value,
+        categoria: document.getElementById('categoria').value,
+        zona: zonaFinal,
+        tipo: document.getElementById('tipo').value,
+        sticker: document.getElementById('sticker').value,
+        info: document.getElementById('info').value,
+        descripcion: document.getElementById('descripcion').value,
+        recomendacion: document.getElementById('recomendacion').value
+      };
+
+      try {
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(lugarData)
+        });
+
+        status.innerText = "Formulario enviado";
+        status.classList.remove('hidden');
+        document.getElementById('trackerForm').reset();
+      } catch (error) {
+        status.innerText = "Error de conexión.";
+        status.classList.remove('hidden');
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "> GUARDAR LUGAR";
+      }
+    });
+  </script>
+
+</body>
+</html>
