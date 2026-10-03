@@ -115,11 +115,10 @@
 
   <div class="app-container">
     <div class="header-title">
-      <h2>Cuentanos tu opinión</h2
+      <h2>EVALUACIÓN PEDAGÓGICA</h2>
       <p>Estudio de preferencias e ingredientes naturales</p>
     </div>
 
-    <!-- Iframe oculto para capturar el envío sin recargar la página -->
     <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { showSuccessMessage(); }"></iframe>
 
     <form id="trackerForm" target="hidden_iframe" method="POST">
@@ -136,7 +135,7 @@
 
       <!-- Pregunta 1 -->
       <div class="question-block">
-        <label class="field-title">1. ¿Usted mantiene un estilo de vida vegano?</label>
+        <label class="field-title">1. ¿Usted comparte un estilo de vida vegano?</label>
         <div class="toggle-group">
           <label class="toggle-option">
             <span class="label-text">SÍ</span>
@@ -163,6 +162,11 @@
           <label class="toggle-option">
             <span class="label-text">NO</span>
             <input type="radio" name="p2" value="NO" required onclick="updateRadioState(this)">
+            <div class="circle-indicator"></div>
+          </label>
+          <label class="toggle-option">
+            <span class="label-text">DE VEZ EN CUANDO</span>
+            <input type="radio" name="p2" value="DE VEZ EN CUANDO" required onclick="updateRadioState(this)">
             <div class="circle-indicator"></div>
           </label>
         </div>
@@ -222,7 +226,6 @@
         </div>
       </div>
 
-      <!-- Campo oculto para concentrar las selecciones de P4 -->
       <input type="hidden" name="p4" id="p4_hidden">
 
       <!-- Pregunta 5 -->
@@ -247,11 +250,43 @@
         </div>
       </div>
 
-      <!-- Pregunta 6 (Abierta) -->
+      <!-- Pregunta 6 (Modificada a opciones fijas) -->
       <div class="question-block">
-        <label class="field-title" for="p6">6. ¿Qué mejorarías del producto? (Recomendaciones)</label>
-        <textarea id="p6" name="p6" placeholder="Escribe tu recomendación u observación..." required oninput="validateWordLimit(this)"></textarea>
-        <div id="p6_counter" class="word-counter">Palabras: 0 / 30</div>
+        <label class="field-title">6. ¿Dónde le gustaría consumir el producto?</label>
+        <div class="toggle-group">
+          <label class="toggle-option">
+            <span class="label-text">GIMNASIO</span>
+            <input type="radio" name="p6" value="GIMNASIO" required onclick="updateRadioState(this)">
+            <div class="circle-indicator"></div>
+          </label>
+          <label class="toggle-option">
+            <span class="label-text">TRABAJO</span>
+            <input type="radio" name="p6" value="TRABAJO" required onclick="updateRadioState(this)">
+            <div class="circle-indicator"></div>
+          </label>
+          <label class="toggle-option">
+            <span class="label-text">CASA</span>
+            <input type="radio" name="p6" value="CASA" required onclick="updateRadioState(this)">
+            <div class="circle-indicator"></div>
+          </label>
+          <label class="toggle-option">
+            <span class="label-text">TIENDA NATURISTA</span>
+            <input type="radio" name="p6" value="TIENDA NATURISTA" required onclick="updateRadioState(this)">
+            <div class="circle-indicator"></div>
+          </label>
+          <label class="toggle-option">
+            <span class="label-text">RESTAURANTE</span>
+            <input type="radio" name="p6" value="RESTAURANTE" required onclick="updateRadioState(this)">
+            <div class="circle-indicator"></div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Pregunta 7 -->
+      <div class="question-block">
+        <label class="field-title" for="p7">7. ¿Qué mejorarías del producto? (Recomendaciones)</label>
+        <textarea id="p7" name="p7" placeholder="Escribe tu recomendación u observación..." required oninput="validateWordLimit(this)"></textarea>
+        <div id="p7_counter" class="word-counter">Palabras: 0 / 30</div>
       </div>
 
       <button type="submit" class="submit-btn" id="submitBtn">Enviar Evaluación</button>
@@ -261,7 +296,6 @@
   </div>
 
   <script>
-    // URL actualizada de la aplicación web
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxAelaGsuF31P0PWHVW2QyWyRvEmmG9yd64YhoSrba3X6ptsJ6nD90_iOnth_jilWoY/exec";
 
     let submitted = false;
@@ -290,7 +324,7 @@
 
     function validateWordLimit(textarea) {
       const words = textarea.value.trim().split(/\s+/).filter(word => word.length > 0);
-      const counter = document.getElementById('p6_counter');
+      const counter = document.getElementById('p7_counter');
       
       if (words.length > 30) {
         const truncated = words.slice(0, 30).join(" ");
@@ -331,7 +365,7 @@
       status.classList.remove('hidden');
       form.reset();
       document.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
-      document.getElementById('p6_counter').innerText = "Palabras: 0 / 30";
+      document.getElementById('p7_counter').innerText = "Palabras: 0 / 30";
       btn.disabled = false;
       btn.innerText = "Enviar Evaluación";
       submitted = false;
