@@ -7,26 +7,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* Paleta Marca Natural Profesional */
       --bg-gradient-start: #f4f7f4;
       --bg-gradient-end: #e2ebe2;
       --card-bg: #ffffff;
-      --brand-primary: #2d5a27;      /* Verde bosque profesional */
-      --brand-accent: #486b43;       /* Verde salvia */
-      --brand-light: #f0f5ef;        /* Verde muy suave para fondos */
-      --green-active: #22c55e;       /* Verde vibrante para selección activa */
-      --text-main: #1f2937;          /* Gris oscuro lectura limpia */
+      --brand-primary: #2d5a27;
+      --brand-accent: #486b43;
+      --brand-light: #f0f5ef;
+      --green-active: #22c55e;
+      --text-main: #1f2937;
       --text-muted: #6b7280;
       --border-color: #d1d5db;
       --radius-lg: 16px;
       --radius-md: 10px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -49,191 +44,54 @@
       border: 1px solid rgba(45, 90, 39, 0.1);
     }
 
-    .header-title {
-      text-align: center;
-      margin-bottom: 30px;
-    }
+    .header-title { text-align: center; margin-bottom: 30px; }
+    .header-title h2 { color: var(--brand-primary); font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+    .header-title p { color: var(--text-muted); font-size: 13px; }
 
-    .header-title h2 {
-      color: var(--brand-primary);
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      margin-bottom: 6px;
-    }
-
-    .header-title p {
-      color: var(--text-muted);
-      font-size: 13px;
-    }
-
-    .field-block, .question-block {
-      margin-bottom: 22px;
-    }
-
-    label.field-title {
-      font-size: 13.5px;
-      font-weight: 600;
-      color: var(--brand-primary);
-      display: block;
-      margin-bottom: 10px;
-      line-height: 1.4;
-    }
+    .field-block, .question-block { margin-bottom: 22px; }
+    label.field-title { font-size: 13.5px; font-weight: 600; color: var(--brand-primary); display: block; margin-bottom: 10px; }
 
     input[type="text"], input[type="number"] {
-      font-family: inherit;
-      font-size: 14px;
-      width: 100%;
-      padding: 12px 16px;
-      background-color: var(--brand-light);
-      color: var(--text-main);
-      border: 1.5px solid var(--border-color);
-      border-radius: var(--radius-md);
-      outline: none;
-      transition: all 0.2s ease;
+      font-family: inherit; font-size: 14px; width: 100%; padding: 12px 16px;
+      background-color: var(--brand-light); color: var(--text-main);
+      border: 1.5px solid var(--border-color); border-radius: var(--radius-md); outline: none;
     }
 
-    input[type="text"]:focus, input[type="number"]:focus {
-      border-color: var(--brand-primary);
-      background-color: #ffffff;
-      box-shadow: 0 0 0 3px rgba(45, 90, 39, 0.12);
-    }
-
-    /* Opciones interactivas con indicador circular */
-    .toggle-group {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
+    .toggle-group { display: flex; gap: 10px; flex-wrap: wrap; }
     .toggle-option {
-      flex: 1;
-      min-width: 100px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 14px;
-      border: 1.5px solid var(--border-color);
-      border-radius: var(--radius-md);
-      background-color: #ffffff;
-      cursor: pointer;
-      user-select: none;
-      transition: all 0.2s ease;
+      flex: 1; min-width: 100px; display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 14px; border: 1.5px solid var(--border-color); border-radius: var(--radius-md);
+      background-color: #ffffff; cursor: pointer; user-select: none;
     }
+    .toggle-option input[type="radio"] { display: none; }
+    .toggle-option span.label-text { font-size: 13px; font-weight: 600; }
+    .circle-indicator { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--border-color); }
 
-    .toggle-option input[type="radio"] {
-      display: none;
-    }
+    .toggle-option.active { border-color: var(--green-active); background-color: var(--brand-light); }
+    .toggle-option.active .circle-indicator { border-color: var(--green-active); background-color: var(--green-active); }
 
-    .toggle-option span.label-text {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-main);
-    }
-
-    .circle-indicator {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      border: 2px solid var(--border-color);
-      background-color: #ffffff;
-      transition: all 0.2s ease;
-      flex-shrink: 0;
-    }
-
-    /* Estado seleccionado */
-    .toggle-option input[type="radio"]:checked + .circle-indicator,
-    .toggle-option.active .circle-indicator {
-      border-color: var(--green-active);
-      background-color: var(--green-active);
-      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
-    }
-
-    .toggle-option.active {
-      border-color: var(--green-active);
-      background-color: var(--brand-light);
-    }
-
-    .toggle-option.active .label-text {
-      color: var(--brand-primary);
-    }
-
-    /* Pregunta 4: Checkboxes estilo tarjetas */
-    .checkbox-group {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
+    .checkbox-group { display: flex; flex-direction: column; gap: 10px; }
     .checkbox-card {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 16px;
-      border: 1.5px solid var(--border-color);
-      border-radius: var(--radius-md);
-      background-color: #ffffff;
-      cursor: pointer;
-      transition: all 0.2s ease;
+      display: flex; align-items: center; justify-content: space-between; padding: 12px 16px;
+      border: 1.5px solid var(--border-color); border-radius: var(--radius-md); cursor: pointer;
     }
-
-    .checkbox-card input[type="checkbox"] {
-      display: none;
-    }
-
-    .checkbox-card span.label-text {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text-main);
-    }
-
-    .checkbox-card.active {
-      border-color: var(--green-active);
-      background-color: var(--brand-light);
-    }
-
-    .checkbox-card.active .circle-indicator {
-      border-color: var(--green-active);
-      background-color: var(--green-active);
-      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
-    }
+    .checkbox-card input[type="checkbox"] { display: none; }
+    .checkbox-card span.label-text { font-size: 13px; font-weight: 500; }
+    .checkbox-card.active { border-color: var(--green-active); background-color: var(--brand-light); }
+    .checkbox-card.active .circle-indicator { border-color: var(--green-active); background-color: var(--green-active); }
 
     button.submit-btn {
-      width: 100%;
-      padding: 15px;
-      margin-top: 15px;
-      background-color: var(--brand-primary);
-      color: #ffffff;
-      font-family: inherit;
-      font-size: 15px;
-      font-weight: 600;
-      border: none;
-      border-radius: var(--radius-md);
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(45, 90, 39, 0.2);
-      transition: all 0.2s ease;
-    }
-
-    button.submit-btn:hover {
-      background-color: var(--brand-accent);
-      transform: translateY(-1px);
+      width: 100%; padding: 15px; margin-top: 15px; background-color: var(--brand-primary);
+      color: #ffffff; font-family: inherit; font-size: 15px; font-weight: 600;
+      border: none; border-radius: var(--radius-md); cursor: pointer;
     }
 
     #statusMessage {
-      margin-top: 18px;
-      padding: 14px;
-      text-align: center;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--brand-primary);
-      border-radius: var(--radius-md);
-      background-color: var(--brand-light);
+      margin-top: 18px; padding: 14px; text-align: center; font-size: 13px; font-weight: 600;
+      color: var(--brand-primary); border-radius: var(--radius-md); background-color: var(--brand-light);
       border: 1px solid var(--brand-accent);
     }
-
-    .hidden {
-      display: none;
-    }
+    .hidden { display: none; }
   </style>
 </head>
 <body>
@@ -244,17 +102,19 @@
       <p>Estudio de preferencias e ingredientes naturales</p>
     </div>
 
-    <form id="trackerForm">
+    <!-- Iframe oculto para evitar redirecciones o problemas con CORS -->
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { showSuccessMessage(); }"></iframe>
+
+    <form id="trackerForm" target="hidden_iframe" method="POST">
       
-      <!-- Datos personales -->
       <div class="field-block">
         <label class="field-title" for="nombre">Nombre Completo</label>
-        <input type="text" id="nombre" placeholder="Ej. Ana Martínez" required>
+        <input type="text" id="nombre" name="nombre" placeholder="Ej. Ana Martínez" required>
       </div>
 
       <div class="field-block">
         <label class="field-title" for="edad">Edad</label>
-        <input type="number" id="edad" placeholder="Ej. 24" min="1" max="120" required>
+        <input type="number" id="edad" name="edad" placeholder="Ej. 24" min="1" max="120" required>
       </div>
 
       <!-- Pregunta 1 -->
@@ -313,7 +173,7 @@
         </div>
       </div>
 
-      <!-- Pregunta 4 (Selección Múltiple) -->
+      <!-- Pregunta 4 -->
       <div class="question-block">
         <label class="field-title">4. ¿Cuál de estos factores te resulta más atractivo del producto? (Selección múltiple)</label>
         <div class="checkbox-group">
@@ -345,6 +205,9 @@
         </div>
       </div>
 
+      <!-- Campo oculto donde se concatenan las selecciones de la pregunta 4 -->
+      <input type="hidden" name="p4" id="p4_hidden">
+
       <!-- Pregunta 5 -->
       <div class="question-block">
         <label class="field-title">5. ¿Le gustaría consumirlo frío o caliente?</label>
@@ -374,8 +237,12 @@
   </div>
 
   <script>
-    // URL Actualizado
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxv6TIUtook3dTE0wYUzbhjrYdvGPkqfpLJFmi4b5fDFUu75uFXJ7BpaE8INUzR5wKN/exec";
+    // URL de la App Web configurada
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzUjGxCsa7fSkSGfcT6K5yTzd5qtJsbBUMzvyXAyG4RGHaQpvQ0whrBC-7GUmYxh2Q_/exec";
+
+    let submitted = false;
+    const form = document.getElementById('trackerForm');
+    form.action = GOOGLE_SCRIPT_URL;
 
     function updateRadioState(input) {
       const groupName = input.name;
@@ -397,53 +264,35 @@
       }, 10);
     }
 
-    document.getElementById('trackerForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
-
-      const btn = document.getElementById('submitBtn');
-      const status = document.getElementById('statusMessage');
-
+    form.addEventListener('submit', function(e) {
       const p4Checkboxes = document.querySelectorAll('input[name="p4_opcion"]:checked');
       if (p4Checkboxes.length === 0) {
+        e.preventDefault();
         alert("Por favor selecciona al menos una opción en la pregunta 4.");
         return;
       }
 
-      const p4Respuestas = Array.from(p4Checkboxes).map(cb => cb.value).join(', ');
+      // Concatena las respuestas seleccionadas en el campo p4
+      const p4Valores = Array.from(p4Checkboxes).map(cb => cb.value).join(', ');
+      document.getElementById('p4_hidden').value = p4Valores;
 
+      const btn = document.getElementById('submitBtn');
       btn.disabled = true;
       btn.innerText = "Enviando respuestas...";
-
-      const evaluacionData = {
-        nombre: document.getElementById('nombre').value,
-        edad: document.getElementById('edad').value,
-        p1: document.querySelector('input[name="p1"]:checked').value,
-        p2: document.querySelector('input[name="p2"]:checked').value,
-        p3: document.querySelector('input[name="p3"]:checked').value,
-        p4: p4Respuestas,
-        p5: document.querySelector('input[name="p5"]:checked').value
-      };
-
-      try {
-        await fetch(GOOGLE_SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(evaluacionData)
-        });
-
-        status.innerText = "¡Muchas gracias! Evaluación enviada con éxito.";
-        status.classList.remove('hidden');
-        document.getElementById('trackerForm').reset();
-        document.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
-      } catch (error) {
-        status.innerText = "Ocurrió un error al enviar. Por favor intenta de nuevo.";
-        status.classList.remove('hidden');
-      } finally {
-        btn.disabled = false;
-        btn.innerText = "Enviar Evaluación";
-      }
+      submitted = true;
     });
+
+    function showSuccessMessage() {
+      const status = document.getElementById('statusMessage');
+      const btn = document.getElementById('submitBtn');
+      status.innerText = "¡Muchas gracias! Evaluación enviada con éxito.";
+      status.classList.remove('hidden');
+      form.reset();
+      document.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
+      btn.disabled = false;
+      btn.innerText = "Enviar Evaluación";
+      submitted = false;
+    }
   </script>
 
 </body>
