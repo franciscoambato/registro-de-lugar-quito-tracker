@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QUITO TRACKER // REGISTRO RETRO</title>
+  <title>QUITO TRACKER // REGISTRO NATURALEZA</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     :root {
-      --outer-bg: #0b0c16;
-      --frame-blue: #1d71b8;
-      --card-bg: #111625;
-      --blaugrana-blue: #004d98;
-      --blaugrana-red: #a50044;
-      --neon-cyan: #00e5ff;
-      --text-gold: #ffcc00;
+      /* Paleta Naturaleza Retro */
+      --outer-bg: #0d1b1e;        /* Verde noche profundo */
+      --frame-green: #1f4e38;     /* Verde bosque estructurado */
+      --card-bg: #11221f;         /* Verde follaje oscuro */
+      --accent-leaf: #2e8b57;     /* Verde esmeralda / hoja */
+      --accent-moss: #556b2f;     /* Verde musgo */
+      --neon-lime: #76ff03;       /* Verde neón brillante para bordes/resaltados */
+      --text-gold: #e6c280;       /* Tierra/Dorado cálido */
     }
 
     body {
@@ -27,30 +28,30 @@
     }
 
     .app-container {
-      background-color: var(--frame-blue);
-      border: 4px solid var(--neon-cyan);
+      background-color: var(--frame-green);
+      border: 4px solid var(--neon-lime);
       border-radius: 12px;
       padding: 15px;
-      box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+      box-shadow: 0 0 15px rgba(118, 255, 3, 0.3);
     }
 
     .form-card {
       position: relative;
       background: var(--card-bg);
       padding: 25px;
-      border: 3px solid var(--blaugrana-red);
+      border: 3px solid var(--accent-moss);
       border-radius: 6px;
       box-shadow: inset 0 0 10px #000;
       overflow: hidden;
     }
 
-    /* Estática / Scanlines CRT */
+    /* Scanlines CRT en tono verdoso */
     .form-card::before {
       content: " ";
       display: block;
       position: absolute;
       top: 0; left: 0; bottom: 0; right: 0;
-      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.35) 50%);
+      background: linear-gradient(rgba(18, 24, 16, 0) 50%, rgba(0, 0, 0, 0.4) 50%);
       background-size: 100% 4px;
       z-index: 2;
       pointer-events: none;
@@ -59,56 +60,61 @@
     h2 {
       color: var(--text-gold);
       text-align: center;
-      font-size: 14px;
-      text-shadow: 2px 2px var(--blaugrana-blue);
+      font-size: 13px;
+      text-shadow: 2px 2px var(--outer-bg);
       margin-bottom: 25px;
-      border-bottom: 3px dashed var(--blaugrana-red);
+      border-bottom: 3px dashed var(--accent-leaf);
       padding-bottom: 12px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .question-block {
+      border-bottom: 1px dashed var(--accent-moss);
+      padding-bottom: 15px;
+      margin-top: 15px;
       position: relative;
       z-index: 3;
     }
 
     label {
       font-size: 9px;
-      color: var(--neon-cyan);
+      color: var(--neon-lime);
       display: block;
-      margin-top: 15px;
+      margin-top: 10px;
       text-transform: uppercase;
-      position: relative;
-      z-index: 3;
+      line-height: 1.4;
     }
 
-    input, select, textarea {
+    select, textarea {
       font-family: 'Press Start 2P', monospace;
       font-size: 10px;
       width: 100%;
       padding: 10px;
       margin-top: 8px;
       box-sizing: border-box;
-      background-color: #06080e;
+      background-color: #08100e;
       color: #fff;
-      border: 2px solid var(--blaugrana-blue);
+      border: 2px solid var(--accent-leaf);
       border-radius: 4px;
       outline: none;
-      position: relative;
-      z-index: 3;
     }
 
-    input:focus, select:focus, textarea:focus {
-      border-color: var(--blaugrana-red);
-      background-color: #0d111d;
+    select:focus, textarea:focus {
+      border-color: var(--neon-lime);
+      background-color: #0d1a17;
     }
 
     button {
       margin-top: 25px;
       width: 100%;
       padding: 15px;
-      background: linear-gradient(90deg, var(--blaugrana-blue) 0%, var(--blaugrana-red) 100%);
+      background: linear-gradient(90deg, var(--accent-moss) 0%, var(--accent-leaf) 100%);
       color: #ffffff;
       font-family: 'Press Start 2P', monospace;
       font-size: 11px;
       font-weight: bold;
-      border: 2px solid var(--neon-cyan);
+      border: 2px solid var(--neon-lime);
       border-radius: 4px;
       box-shadow: 3px 3px 0px #000;
       cursor: pointer;
@@ -126,8 +132,8 @@
       text-align: center;
       font-size: 11px;
       color: var(--text-gold);
-      border: 2px dashed var(--neon-cyan);
-      background-color: #06080e;
+      border: 2px dashed var(--neon-lime);
+      background-color: #08100e;
       position: relative;
       z-index: 3;
     }
@@ -141,51 +147,66 @@
 
   <div class="app-container">
     <div class="form-card">
-      <h2>[ QUITO TRACKER ]<br>REGISTRAR LUGAR</h2>
+      <h2>[ QUITO TRACKER ]<br>EVALUACIÓN ECOLÓGICA / LUGAR</h2>
 
       <form id="trackerForm">
-        <label for="etiqueta">Etiqueta:</label>
-        <input type="text" id="etiqueta" value="PLANES DESTACADOS PARA JÓVENES" required>
-
-        <label for="nombre">Nombre del Lugar / Feria:</label>
-        <input type="text" id="nombre" placeholder="ej. Di Pinto (Café & Taller)" required>
-
-        <label for="direccion">Dirección (Google Maps / Link):</label>
-        <input type="text" id="direccion" placeholder="ej. Av. Amazonas y República" required>
-
-        <label for="categoria">Categoría:</label>
-        <input type="text" id="categoria" placeholder="ej. HASTA $15 USD" required>
-
-        <label for="zona">Zona:</label>
-        <select id="zona" onchange="toggleOtraZona(this.value)" required>
-          <option value="NORTE">NORTE</option>
-          <option value="CENTRO">CENTRO</option>
-          <option value="SUR">SUR</option>
-          <option value="VALLES">VALLES</option>
-          <option value="OTRO">OTRO...</option>
-        </select>
-
-        <div id="otraZonaContainer" class="hidden">
-          <label for="otraZona">Especificar otra zona:</label>
-          <input type="text" id="otraZona" placeholder="ej. CUMBAYÁ / TUMBACU">
+        
+        <!-- Pregunta 1 -->
+        <div class="question-block">
+          <label for="p1_respuesta">1. ¿El lugar cuenta con áreas verdes o espacios al aire libre?</label>
+          <select id="p1_respuesta" required>
+            <option value="" disabled selected>SELECCIONAR...</option>
+            <option value="SI">SÍ</option>
+            <option value="NO">NO</option>
+          </select>
+          <textarea id="p1_porque" rows="2" placeholder="¿Por qué? (Opcional)"></textarea>
         </div>
 
-        <label for="tipo">Tipo:</label>
-        <input type="text" id="tipo" placeholder="ej. Plan Jóvenes / Arte & Café" required>
+        <!-- Pregunta 2 -->
+        <div class="question-block">
+          <label for="p2_respuesta">2. ¿Tiene acceso de transporte sostenible (bici, caminable)?</label>
+          <select id="p2_respuesta" required>
+            <option value="" disabled selected>SELECCIONAR...</option>
+            <option value="SI">SÍ</option>
+            <option value="NO">NO</option>
+          </select>
+          <textarea id="p2_porque" rows="2" placeholder="¿Por qué? (Opcional)"></textarea>
+        </div>
 
-        <label for="sticker">Sticker / Emoji:</label>
-        <input type="text" id="sticker" placeholder="🎨" required>
+        <!-- Pregunta 3 -->
+        <div class="question-block">
+          <label for="p3_respuesta">3. ¿Es un espacio tranquilo y libre de contaminación auditiva?</label>
+          <select id="p3_respuesta" required>
+            <option value="" disabled selected>SELECCIONAR...</option>
+            <option value="SI">SÍ</option>
+            <option value="NO">NO</option>
+          </select>
+          <textarea id="p3_porque" rows="2" placeholder="¿Por qué? (Opcional)"></textarea>
+        </div>
 
-        <label for="info">Información rápida (info):</label>
-        <input type="text" id="info" placeholder="ej. Kits desde $12.00 USD" required>
+        <!-- Pregunta 4 -->
+        <div class="question-block">
+          <label for="p4_respuesta">4. ¿Ofrece opciones económicas o de bajo costo (hasta $15 USD)?</label>
+          <select id="p4_respuesta" required>
+            <option value="" disabled selected>SELECCIONAR...</option>
+            <option value="SI">SÍ</option>
+            <option value="NO">NO</option>
+          </select>
+          <textarea id="p4_porque" rows="2" placeholder="¿Por qué? (Opcional)"></textarea>
+        </div>
 
-        <label for="descripcion">Descripción:</label>
-        <textarea id="descripcion" rows="3" placeholder="Concepto de café-taller..." required></textarea>
+        <!-- Pregunta 5 -->
+        <div class="question-block">
+          <label for="p5_respuesta">5. ¿Lo recomendarías para visitar en grupo o pareja?</label>
+          <select id="p5_respuesta" required>
+            <option value="" disabled selected>SELECCIONAR...</option>
+            <option value="SI">SÍ</option>
+            <option value="NO">NO</option>
+          </select>
+          <textarea id="p5_porque" rows="2" placeholder="¿Por qué? (Opcional)"></textarea>
+        </div>
 
-        <label for="recomendacion">Recomendación:</label>
-        <input type="text" id="recomendacion" placeholder="ej. Ideal para ir en pareja" required>
-
-        <button type="submit" id="submitBtn">> GUARDAR LUGAR</button>
+        <button type="submit" id="submitBtn">> GUARDAR EVALUACIÓN</button>
       </form>
 
       <div id="statusMessage" class="hidden"></div>
@@ -193,21 +214,7 @@
   </div>
 
   <script>
-    // Tu URL de Google Apps Script ya vinculada
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyYlDwmiQ406l3_FsUqZeOtP2B5EgdwchCeBvKSZyBOKx9Wm2i_4INY9OqcnXOem8sc/exec";
-
-    function toggleOtraZona(val) {
-      const container = document.getElementById('otraZonaContainer');
-      const inputOtra = document.getElementById('otraZona');
-      if (val === 'OTRO') {
-        container.classList.remove('hidden');
-        inputOtra.required = true;
-      } else {
-        container.classList.add('hidden');
-        inputOtra.required = false;
-        inputOtra.value = '';
-      }
-    }
 
     document.getElementById('trackerForm').addEventListener('submit', async function(e) {
       e.preventDefault();
@@ -218,20 +225,17 @@
       btn.disabled = true;
       btn.innerText = "ENVIANDO...";
 
-      const zonaSelect = document.getElementById('zona').value;
-      const zonaFinal = zonaSelect === 'OTRO' ? document.getElementById('otraZona').value.toUpperCase() : zonaSelect;
-
       const lugarData = {
-        etiqueta: document.getElementById('etiqueta').value,
-        nombre: document.getElementById('nombre').value,
-        direccion_maps: document.getElementById('direccion').value,
-        categoria: document.getElementById('categoria').value,
-        zona: zonaFinal,
-        tipo: document.getElementById('tipo').value,
-        sticker: document.getElementById('sticker').value,
-        info: document.getElementById('info').value,
-        descripcion: document.getElementById('descripcion').value,
-        recomendacion: document.getElementById('recomendacion').value
+        p1_respuesta: document.getElementById('p1_respuesta').value,
+        p1_porque: document.getElementById('p1_porque').value,
+        p2_respuesta: document.getElementById('p2_respuesta').value,
+        p2_porque: document.getElementById('p2_porque').value,
+        p3_respuesta: document.getElementById('p3_respuesta').value,
+        p3_porque: document.getElementById('p3_porque').value,
+        p4_respuesta: document.getElementById('p4_respuesta').value,
+        p4_porque: document.getElementById('p4_porque').value,
+        p5_respuesta: document.getElementById('p5_respuesta').value,
+        p5_porque: document.getElementById('p5_porque').value
       };
 
       try {
@@ -242,7 +246,7 @@
           body: JSON.stringify(lugarData)
         });
 
-        status.innerText = "Formulario enviado";
+        status.innerText = "Formulario enviado con éxito";
         status.classList.remove('hidden');
         document.getElementById('trackerForm').reset();
       } catch (error) {
@@ -250,7 +254,7 @@
         status.classList.remove('hidden');
       } finally {
         btn.disabled = false;
-        btn.innerText = "> GUARDAR LUGAR";
+        btn.innerText = "> GUARDAR EVALUACIÓN";
       }
     });
   </script>
