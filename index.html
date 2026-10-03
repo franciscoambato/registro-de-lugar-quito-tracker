@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QUITO TRACKER // REGISTRO NATURALEZA</title>
+  <title>EVALUACIÓN PEDAGÓGICA // REGISTRO</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -69,7 +69,7 @@
       z-index: 3;
     }
 
-    .question-block {
+    .field-block, .question-block {
       border-bottom: 1px dashed var(--accent-moss);
       padding-bottom: 15px;
       margin-top: 15px;
@@ -86,7 +86,7 @@
       line-height: 1.4;
     }
 
-    select, textarea {
+    input, select {
       font-family: 'Press Start 2P', monospace;
       font-size: 10px;
       width: 100%;
@@ -100,7 +100,7 @@
       outline: none;
     }
 
-    select:focus, textarea:focus {
+    input:focus, select:focus {
       border-color: var(--neon-lime);
       background-color: #0d1a17;
     }
@@ -147,63 +147,65 @@
 
   <div class="app-container">
     <div class="form-card">
-      <h2>[ QUITO TRACKER ]<br>EVALUACIÓN ECOLÓGICA / LUGAR</h2>
+      <h2>[ REGISTRO ]<br>EVALUACIÓN PEDAGÓGICA</h2>
 
       <form id="trackerForm">
         
-        <!-- Pregunta 1 -->
-        <div class="question-block">
-          <label for="p1_respuesta">1. ¿El lugar cuenta con áreas verdes o espacios al aire libre?</label>
-          <select id="p1_respuesta" required>
-            <option value="" disabled selected>SELECCIONAR...</option>
-            <option value="SI">SÍ</option>
-            <option value="NO">NO</option>
-          </select>
-          <textarea id="p1_porque" rows="2" placeholder="¿Por qué? (Opcional)"></textarea>
+        <!-- Datos personales -->
+        <div class="field-block">
+          <label for="nombre">Nombre Completo:</label>
+          <input type="text" id="nombre" placeholder="ej. Juan Pérez" required>
         </div>
 
-        <!-- Pregunta 2 -->
-        <div class="question-block">
-          <label for="p2_respuesta">2. ¿Tiene acceso de transporte sostenible (bici, caminable)?</label>
-          <select id="p2_respuesta" required>
-            <option value="" disabled selected>SELECCIONAR...</option>
-            <option value="SI">SÍ</option>
-            <option value="NO">NO</option>
-          </select>
-          <textarea id="p2_porque" rows="2" placeholder="¿Por qué? (Opcional)"></textarea>
+        <div class="field-block">
+          <label for="edad">Edad:</label>
+          <input type="number" id="edad" placeholder="ej. 18" min="1" max="120" required>
         </div>
 
-        <!-- Pregunta 3 -->
+        <!-- Preguntas cerradas -->
         <div class="question-block">
-          <label for="p3_respuesta">3. ¿Es un espacio tranquilo y libre de contaminación auditiva?</label>
-          <select id="p3_respuesta" required>
+          <label for="p1">1. ¿Consideras que el ritmo de la clase es adecuado?</label>
+          <select id="p1" required>
             <option value="" disabled selected>SELECCIONAR...</option>
             <option value="SI">SÍ</option>
             <option value="NO">NO</option>
           </select>
-          <textarea id="p3_porque" rows="2" placeholder="¿Por qué? (Opcional)"></textarea>
         </div>
 
-        <!-- Pregunta 4 -->
         <div class="question-block">
-          <label for="p4_respuesta">4. ¿Ofrece opciones económicas o de bajo costo (hasta $15 USD)?</label>
-          <select id="p4_respuesta" required>
+          <label for="p2">2. ¿Los materiales visuales y recursos facilitan tu aprendizaje?</label>
+          <select id="p2" required>
             <option value="" disabled selected>SELECCIONAR...</option>
             <option value="SI">SÍ</option>
             <option value="NO">NO</option>
           </select>
-          <textarea id="p4_porque" rows="2" placeholder="¿Por qué? (Opcional)"></textarea>
         </div>
 
-        <!-- Pregunta 5 -->
         <div class="question-block">
-          <label for="p5_respuesta">5. ¿Lo recomendarías para visitar en grupo o pareja?</label>
-          <select id="p5_respuesta" required>
+          <label for="p3">3. ¿Sientes que puedes resolver tus dudas durante la sesión?</label>
+          <select id="p3" required>
             <option value="" disabled selected>SELECCIONAR...</option>
             <option value="SI">SÍ</option>
             <option value="NO">NO</option>
           </select>
-          <textarea id="p5_porque" rows="2" placeholder="¿Por qué? (Opcional)"></textarea>
+        </div>
+
+        <div class="question-block">
+          <label for="p4">4. ¿Las actividades prácticas ayudan a fijar el conocimiento?</label>
+          <select id="p4" required>
+            <option value="" disabled selected>SELECCIONAR...</option>
+            <option value="SI">SÍ</option>
+            <option value="NO">NO</option>
+          </select>
+        </div>
+
+        <div class="question-block">
+          <label for="p5">5. ¿Recomendarías este contenido a otros estudiantes?</label>
+          <select id="p5" required>
+            <option value="" disabled selected>SELECCIONAR...</option>
+            <option value="SI">SÍ</option>
+            <option value="NO">NO</option>
+          </select>
         </div>
 
         <button type="submit" id="submitBtn">> GUARDAR EVALUACIÓN</button>
@@ -225,17 +227,14 @@
       btn.disabled = true;
       btn.innerText = "ENVIANDO...";
 
-      const lugarData = {
-        p1_respuesta: document.getElementById('p1_respuesta').value,
-        p1_porque: document.getElementById('p1_porque').value,
-        p2_respuesta: document.getElementById('p2_respuesta').value,
-        p2_porque: document.getElementById('p2_porque').value,
-        p3_respuesta: document.getElementById('p3_respuesta').value,
-        p3_porque: document.getElementById('p3_porque').value,
-        p4_respuesta: document.getElementById('p4_respuesta').value,
-        p4_porque: document.getElementById('p4_porque').value,
-        p5_respuesta: document.getElementById('p5_respuesta').value,
-        p5_porque: document.getElementById('p5_porque').value
+      const evaluacionData = {
+        nombre: document.getElementById('nombre').value,
+        edad: document.getElementById('edad').value,
+        p1: document.getElementById('p1').value,
+        p2: document.getElementById('p2').value,
+        p3: document.getElementById('p3').value,
+        p4: document.getElementById('p4').value,
+        p5: document.getElementById('p5').value
       };
 
       try {
@@ -243,10 +242,10 @@
           method: 'POST',
           mode: 'no-cors',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(lugarData)
+          body: JSON.stringify(evaluacionData)
         });
 
-        status.innerText = "Formulario enviado con éxito";
+        status.innerText = "Evaluación enviada con éxito";
         status.classList.remove('hidden');
         document.getElementById('trackerForm').reset();
       } catch (error) {
