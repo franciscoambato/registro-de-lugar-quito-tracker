@@ -119,7 +119,7 @@
       <p>Estudio de preferencias e ingredientes naturales</p>
     </div>
 
-    <!-- Iframe oculto para capturar la respuesta sin recargar la página -->
+    <!-- Iframe oculto para capturar el envío sin recargar la página -->
     <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { showSuccessMessage(); }"></iframe>
 
     <form id="trackerForm" target="hidden_iframe" method="POST">
@@ -222,7 +222,7 @@
         </div>
       </div>
 
-      <!-- Campo oculto para concentrar selecciones de P4 -->
+      <!-- Campo oculto para concentrar las selecciones de P4 -->
       <input type="hidden" name="p4" id="p4_hidden">
 
       <!-- Pregunta 5 -->
@@ -261,7 +261,8 @@
   </div>
 
   <script>
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzUjGxCsa7fSkSGfcT6K5yTzd5qtJsbBUMzvyXAyG4RGHaQpvQ0whrBC-7GUmYxh2Q_/exec";
+    // URL actualizada de la aplicación web
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxAelaGsuF31P0PWHVW2QyWyRvEmmG9yd64YhoSrba3X6ptsJ6nD90_iOnth_jilWoY/exec";
 
     let submitted = false;
     const form = document.getElementById('trackerForm');
@@ -292,7 +293,6 @@
       const counter = document.getElementById('p6_counter');
       
       if (words.length > 30) {
-        // Limita automáticamente el texto a las primeras 30 palabras
         const truncated = words.slice(0, 30).join(" ");
         textarea.value = truncated;
       }
