@@ -280,7 +280,7 @@
         <div class="toggle-group">
           <label class="toggle-option">
             <span class="label-text">SÍ</span>
-            <input type="radio" name="p1" value="SI" required onclick="updateRadioState(this)">
+            <input type="radio" name="p2" value="SI" required onclick="updateRadioState(this)">
             <div class="circle-indicator"></div>
           </label>
           <label class="toggle-option">
@@ -291,7 +291,7 @@
         </div>
       </div>
 
-      <!-- Pregunta 3 (Ahora con 3 opciones: HORCHATA / SÁBILA / AMBOS) -->
+      <!-- Pregunta 3 -->
       <div class="question-block">
         <label class="field-title">3. ¿Usted prefiere el producto por la horchata o por la sábila?</label>
         <div class="toggle-group">
@@ -345,7 +345,7 @@
         </div>
       </div>
 
-      <!-- Pregunta 5 (3 Opciones) -->
+      <!-- Pregunta 5 -->
       <div class="question-block">
         <label class="field-title">5. ¿Le gustaría consumirlo frío o caliente?</label>
         <div class="toggle-group">
@@ -374,7 +374,8 @@
   </div>
 
   <script>
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyYlDwmiQ406l3_FsUqZeOtP2B5EgdwchCeBvKSZyBOKx9Wm2i_4INY9OqcnXOem8sc/exec";
+    // URL Actualizado
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxv6TIUtook3dTE0wYUzbhjrYdvGPkqfpLJFmi4b5fDFUu75uFXJ7BpaE8INUzR5wKN/exec";
 
     function updateRadioState(input) {
       const groupName = input.name;
