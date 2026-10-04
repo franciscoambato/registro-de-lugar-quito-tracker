@@ -133,7 +133,7 @@
         <input type="number" id="edad" name="edad" placeholder="Ej. 24" min="1" max="120" required>
       </div>
 
-      <!-- Teléfono abajo de Edad -->
+      <!-- Teléfono -->
       <div class="field-block">
         <label class="field-title" for="telefono">Número Telefónico</label>
         <input type="tel" id="telefono" name="telefono" placeholder="Ej. +593 99 123 4567" required>
@@ -255,7 +255,7 @@
         </div>
       </div>
 
-      <!-- Pregunta 6 (Selección múltiple) -->
+      <!-- Pregunta 6 -->
       <div class="question-block">
         <label class="field-title">6. ¿Dónde le gustaría consumir el producto? (Selección múltiple)</label>
         <div class="checkbox-group">
@@ -288,11 +288,33 @@
       </div>
       <input type="hidden" name="p6" id="p6_hidden">
 
-      <!-- Pregunta 7 -->
+      <!-- Pregunta 7: Nueva estructura con opciones actualizadas -->
       <div class="question-block">
-        <label class="field-title" for="p7">7. ¿Dónde te gustaría comprar este producto?</label>
-        <input type="text" id="p7" name="p7" placeholder="Ej. Supermercados, tiendas locales, en línea..." required>
+        <label class="field-title">7. ¿Cómo te gustaría adquirir el producto? (Selección múltiple)</label>
+        <div class="checkbox-group">
+          <label class="checkbox-card" onclick="toggleCheckbox(this)">
+            <span class="label-text">Comprar en farmacia</span>
+            <input type="checkbox" name="p7_opcion" value="Comprar en farmacia">
+            <div class="circle-indicator"></div>
+          </label>
+          <label class="checkbox-card" onclick="toggleCheckbox(this)">
+            <span class="label-text">Comprar en supermercado</span>
+            <input type="checkbox" name="p7_opcion" value="Comprar en supermercado">
+            <div class="circle-indicator"></div>
+          </label>
+          <label class="checkbox-card" onclick="toggleCheckbox(this)">
+            <span class="label-text">Comprar en centro naturista</span>
+            <input type="checkbox" name="p7_opcion" value="Comprar en centro naturista">
+            <div class="circle-indicator"></div>
+          </label>
+          <label class="checkbox-card" onclick="toggleCheckbox(this)">
+            <span class="label-text">Comprar en linea</span>
+            <input type="checkbox" name="p7_opcion" value="Comprar en linea">
+            <div class="circle-indicator"></div>
+          </label>
+        </div>
       </div>
+      <input type="hidden" name="p7" id="p7_hidden">
 
       <!-- Pregunta 8 (Recomendaciones) -->
       <div class="question-block">
@@ -308,7 +330,6 @@
   </div>
 
   <script>
-    // URL de Google Apps Script actualizada:
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw1jv2hCpX9w7LrWTaU_fBJgfUJOLxE1LvvoEhoaQ9qiDtd7-SV8945rkpu-6aIK6LyKA/exec";
 
     let submitted = false;
@@ -355,25 +376,32 @@
     }
 
     form.addEventListener('submit', function(e) {
-      // Validar Selección Múltiple Pregunta 4
+      // Validar Pregunta 4
       const p4Checkboxes = document.querySelectorAll('input[name="p4_opcion"]:checked');
       if (p4Checkboxes.length === 0) {
         e.preventDefault();
         alert("Por favor selecciona al menos una opción en la pregunta 4.");
         return;
       }
-      const p4Valores = Array.from(p4Checkboxes).map(cb => cb.value).join(', ');
-      document.getElementById('p4_hidden').value = p4Valores;
+      document.getElementById('p4_hidden').value = Array.from(p4Checkboxes).map(cb => cb.value).join(', ');
 
-      // Validar Selección Múltiple Pregunta 6
+      // Validar Pregunta 6
       const p6Checkboxes = document.querySelectorAll('input[name="p6_opcion"]:checked');
       if (p6Checkboxes.length === 0) {
         e.preventDefault();
         alert("Por favor selecciona al menos una opción en la pregunta 6.");
         return;
       }
-      const p6Valores = Array.from(p6Checkboxes).map(cb => cb.value).join(', ');
-      document.getElementById('p6_hidden').value = p6Valores;
+      document.getElementById('p6_hidden').value = Array.from(p6Checkboxes).map(cb => cb.value).join(', ');
+
+      // Validar Pregunta 7
+      const p7Checkboxes = document.querySelectorAll('input[name="p7_opcion"]:checked');
+      if (p7Checkboxes.length === 0) {
+        e.preventDefault();
+        alert("Por favor selecciona al menos una opción en la pregunta 7.");
+        return;
+      }
+      document.getElementById('p7_hidden').value = Array.from(p7Checkboxes).map(cb => cb.value).join(', ');
 
       const btn = document.getElementById('submitBtn');
       btn.disabled = true;
