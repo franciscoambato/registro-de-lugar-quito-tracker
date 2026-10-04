@@ -133,7 +133,7 @@
         <input type="number" id="edad" name="edad" placeholder="Ej. 24" min="1" max="120" required>
       </div>
 
-      <!-- 1. Campo de teléfono añadido abajo de Edad -->
+      <!-- Teléfono abajo de Edad -->
       <div class="field-block">
         <label class="field-title" for="telefono">Número Telefónico</label>
         <input type="tel" id="telefono" name="telefono" placeholder="Ej. +593 99 123 4567" required>
@@ -255,7 +255,7 @@
         </div>
       </div>
 
-      <!-- 3. Pregunta 6 adaptada a Selección Múltiple -->
+      <!-- Pregunta 6 (Selección múltiple) -->
       <div class="question-block">
         <label class="field-title">6. ¿Dónde le gustaría consumir el producto? (Selección múltiple)</label>
         <div class="checkbox-group">
@@ -288,13 +288,13 @@
       </div>
       <input type="hidden" name="p6" id="p6_hidden">
 
-      <!-- 2. Pregunta 7 añadida antes de las Recomendaciones -->
+      <!-- Pregunta 7 -->
       <div class="question-block">
         <label class="field-title" for="p7">7. ¿Dónde te gustaría comprar este producto?</label>
         <input type="text" id="p7" name="p7" placeholder="Ej. Supermercados, tiendas locales, en línea..." required>
       </div>
 
-      <!-- Pregunta 8 (Anterior Pregunta 7: Recomendaciones) -->
+      <!-- Pregunta 8 (Recomendaciones) -->
       <div class="question-block">
         <label class="field-title" for="p8">8. ¿Qué mejorarías del producto? (Recomendaciones)</label>
         <textarea id="p8" name="p8" placeholder="Escribe tu recomendación u observación..." required oninput="validateWordLimit(this)"></textarea>
@@ -308,7 +308,8 @@
   </div>
 
   <script>
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyIHqaPSIR2WzwBrD3tAZIqgA8F0W5Daba9rLSaV7wZwtoz6FCe67F3c9xxjIZqw6Yj/exec";
+    // Tu URL actualizada de Google Apps Script:
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxUMiX_QKzGKlO15_40bm1jgz_pVp3PDgPJd178Gpu6r4__gG9uWHLG3RExms8qN7P_AA/exec";
 
     let submitted = false;
     const form = document.getElementById('trackerForm');
