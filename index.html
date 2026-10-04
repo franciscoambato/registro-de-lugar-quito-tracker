@@ -51,7 +51,7 @@
     .field-block, .question-block { margin-bottom: 22px; }
     label.field-title { font-size: 13.5px; font-weight: 600; color: var(--brand-primary); display: block; margin-bottom: 10px; }
 
-    input[type="text"], input[type="number"], textarea {
+    input[type="text"], input[type="number"], input[type="tel"], textarea {
       font-family: inherit; font-size: 14px; width: 100%; padding: 12px 16px;
       background-color: var(--brand-light); color: var(--text-main);
       border: 1.5px solid var(--border-color); border-radius: var(--radius-md); outline: none;
@@ -90,7 +90,7 @@
     .checkbox-group { display: flex; flex-direction: column; gap: 10px; }
     .checkbox-card {
       display: flex; align-items: center; justify-content: space-between; padding: 12px 16px;
-      border: 1.5px solid var(--border-color); border-radius: var(--radius-md); cursor: pointer;
+      border: 1.5px solid var(--border-color); border-radius: var(--radius-md); cursor: pointer; user-select: none;
     }
     .checkbox-card input[type="checkbox"] { display: none; }
     .checkbox-card span.label-text { font-size: 13px; font-weight: 500; }
@@ -131,6 +131,12 @@
       <div class="field-block">
         <label class="field-title" for="edad">Edad</label>
         <input type="number" id="edad" name="edad" placeholder="Ej. 24" min="1" max="120" required>
+      </div>
+
+      <!-- 1. Campo de teléfono añadido abajo de Edad -->
+      <div class="field-block">
+        <label class="field-title" for="telefono">Número Telefónico</label>
+        <input type="tel" id="telefono" name="telefono" placeholder="Ej. +593 99 123 4567" required>
       </div>
 
       <!-- Pregunta 1 -->
@@ -225,7 +231,6 @@
           </label>
         </div>
       </div>
-
       <input type="hidden" name="p4" id="p4_hidden">
 
       <!-- Pregunta 5 -->
@@ -250,43 +255,50 @@
         </div>
       </div>
 
-      <!-- Pregunta 6 -->
+      <!-- 3. Pregunta 6 adaptada a Selección Múltiple -->
       <div class="question-block">
-        <label class="field-title">6. ¿Dónde le gustaría consumir el producto?</label>
-        <div class="toggle-group">
-          <label class="toggle-option">
+        <label class="field-title">6. ¿Dónde le gustaría consumir el producto? (Selección múltiple)</label>
+        <div class="checkbox-group">
+          <label class="checkbox-card" onclick="toggleCheckbox(this)">
             <span class="label-text">GIMNASIO</span>
-            <input type="radio" name="p6" value="GIMNASIO" required onclick="updateRadioState(this)">
+            <input type="checkbox" name="p6_opcion" value="GIMNASIO">
             <div class="circle-indicator"></div>
           </label>
-          <label class="toggle-option">
+          <label class="checkbox-card" onclick="toggleCheckbox(this)">
             <span class="label-text">TRABAJO</span>
-            <input type="radio" name="p6" value="TRABAJO" required onclick="updateRadioState(this)">
+            <input type="checkbox" name="p6_opcion" value="TRABAJO">
             <div class="circle-indicator"></div>
           </label>
-          <label class="toggle-option">
+          <label class="checkbox-card" onclick="toggleCheckbox(this)">
             <span class="label-text">CASA</span>
-            <input type="radio" name="p6" value="CASA" required onclick="updateRadioState(this)">
+            <input type="checkbox" name="p6_opcion" value="CASA">
             <div class="circle-indicator"></div>
           </label>
-          <label class="toggle-option">
+          <label class="checkbox-card" onclick="toggleCheckbox(this)">
             <span class="label-text">TIENDA NATURISTA</span>
-            <input type="radio" name="p6" value="TIENDA NATURISTA" required onclick="updateRadioState(this)">
+            <input type="checkbox" name="p6_opcion" value="TIENDA NATURISTA">
             <div class="circle-indicator"></div>
           </label>
-          <label class="toggle-option">
+          <label class="checkbox-card" onclick="toggleCheckbox(this)">
             <span class="label-text">RESTAURANTE</span>
-            <input type="radio" name="p6" value="RESTAURANTE" required onclick="updateRadioState(this)">
+            <input type="checkbox" name="p6_opcion" value="RESTAURANTE">
             <div class="circle-indicator"></div>
           </label>
         </div>
       </div>
+      <input type="hidden" name="p6" id="p6_hidden">
 
-      <!-- Pregunta 7 -->
+      <!-- 2. Pregunta 7 añadida antes de las Recomendaciones -->
       <div class="question-block">
-        <label class="field-title" for="p7">7. ¿Qué mejorarías del producto? (Recomendaciones)</label>
-        <textarea id="p7" name="p7" placeholder="Escribe tu recomendación u observación..." required oninput="validateWordLimit(this)"></textarea>
-        <div id="p7_counter" class="word-counter">Palabras: 0 / 30</div>
+        <label class="field-title" for="p7">7. ¿Dónde te gustaría comprar este producto?</label>
+        <input type="text" id="p7" name="p7" placeholder="Ej. Supermercados, tiendas locales, en línea..." required>
+      </div>
+
+      <!-- Pregunta 8 (Anterior Pregunta 7: Recomendaciones) -->
+      <div class="question-block">
+        <label class="field-title" for="p8">8. ¿Qué mejorarías del producto? (Recomendaciones)</label>
+        <textarea id="p8" name="p8" placeholder="Escribe tu recomendación u observación..." required oninput="validateWordLimit(this)"></textarea>
+        <div id="p8_counter" class="word-counter">Palabras: 0 / 30</div>
       </div>
 
       <button type="submit" class="submit-btn" id="submitBtn">Enviar Evaluación</button>
@@ -324,7 +336,7 @@
 
     function validateWordLimit(textarea) {
       const words = textarea.value.trim().split(/\s+/).filter(word => word.length > 0);
-      const counter = document.getElementById('p7_counter');
+      const counter = document.getElementById('p8_counter');
       
       if (words.length > 30) {
         const truncated = words.slice(0, 30).join(" ");
@@ -342,15 +354,25 @@
     }
 
     form.addEventListener('submit', function(e) {
+      // Validar Selección Múltiple Pregunta 4
       const p4Checkboxes = document.querySelectorAll('input[name="p4_opcion"]:checked');
       if (p4Checkboxes.length === 0) {
         e.preventDefault();
         alert("Por favor selecciona al menos una opción en la pregunta 4.");
         return;
       }
-
       const p4Valores = Array.from(p4Checkboxes).map(cb => cb.value).join(', ');
       document.getElementById('p4_hidden').value = p4Valores;
+
+      // Validar Selección Múltiple Pregunta 6
+      const p6Checkboxes = document.querySelectorAll('input[name="p6_opcion"]:checked');
+      if (p6Checkboxes.length === 0) {
+        e.preventDefault();
+        alert("Por favor selecciona al menos una opción en la pregunta 6.");
+        return;
+      }
+      const p6Valores = Array.from(p6Checkboxes).map(cb => cb.value).join(', ');
+      document.getElementById('p6_hidden').value = p6Valores;
 
       const btn = document.getElementById('submitBtn');
       btn.disabled = true;
@@ -365,7 +387,7 @@
       status.classList.remove('hidden');
       form.reset();
       document.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
-      document.getElementById('p7_counter').innerText = "Palabras: 0 / 30";
+      document.getElementById('p8_counter').innerText = "Palabras: 0 / 30";
       btn.disabled = false;
       btn.innerText = "Enviar Evaluación";
       submitted = false;
